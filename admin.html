@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recruiter Console | Recruitive Hiring Systems</title>
+<meta name="description" content="Internal recruiter console for Recruitive Hiring Systems: post job vacancies and review candidate applications and client enquiries.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070f1e">
+<link rel="icon" href="images/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+  <section class="section section--tight">
+    <div class="container">
+      <span class="eyebrow">Internal</span>
+      <h1 style="font-size:clamp(1.6rem,3vw,2.2rem)">Recruiter console</h1>
+      <p class="lead" style="max-width:760px">Post new job vacancies and review everything candidates and clients have submitted through the website.</p>
+
+      <div class="alert alert-warn show" style="max-width:900px;margin-top:22px">
+        <strong>Note on access:</strong> this console is not password-protected by the site itself. Access control for this route must be applied at the hosting layer (route rules / login), not in page JavaScript. Do not share this URL publicly.
+      </div>
+
+      <div class="stat-cards">
+        <div class="stat-card"><strong id="stat-jobs">—</strong><span>Open vacancies</span></div>
+        <div class="stat-card"><strong id="stat-apps">—</strong><span>Applications</span></div>
+        <div class="stat-card"><strong id="stat-new-apps">—</strong><span>New applications</span></div>
+        <div class="stat-card"><strong id="stat-enq">—</strong><span>Client enquiries</span></div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" role="tab" data-tab="post" aria-selected="true">Post a vacancy</button>
+        <button class="tab-btn" role="tab" data-tab="jobs" aria-selected="false">Manage vacancies</button>
+        <button class="tab-btn" role="tab" data-tab="apps" aria-selected="false">Applications</button>
+        <button class="tab-btn" role="tab" data-tab="enq" aria-selected="false">Client enquiries</button>
+      </div>
+
+      <!-- ===== Post a vacancy ===== -->
+      <div class="tab-panel active" id="panel-post" role="tabpanel">
+        <div class="form-card" style="max-width:920px">
+          <h2 style="font-size:1.3rem">New job vacancy</h2>
+          <p class="small muted" style="margin-bottom:20px">Published vacancies appear instantly on the Job Vacancies page.</p>
+
+          <div class="alert" id="post-alert" role="status" aria-live="polite"></div>
+
+          <form id="post-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="p-title">Job title <span class="req">*</span></label>
+                <input type="text" id="p-title" required placeholder="e.g. Senior React Developer">
+              </div>
+              <div class="field">
+                <label for="p-company">Company / client <span class="req">*</span></label>
+                <input type="text" id="p-company" required placeholder="e.g. Northbridge Technologies">
+              </div>
+              <div class="field">
+                <label for="p-location">Location <span class="req">*</span></label>
+                <input type="text" id="p-location" required placeholder="e.g. Sector 62, Noida">
+              </div>
+              <div class="field">
+                <label for="p-type">Job type</label>
+                <select id="p-type"></select>
+              </div>
+              <div class="field">
+                <label for="p-category">Category</label>
+                <select id="p-category"></select>
+              </div>
+              <div class="field">
+                <label for="p-experience">Experience</label>
+                <input type="text" id="p-experience" placeholder="e.g. 3–6 years">
+              </div>
+              <div class="field">
+                <label for="p-salary">Compensation</label>
+                <input type="text" id="p-salary" placeholder="e.g. ₹10–16 LPA">
+              </div>
+              <div class="field">
+                <label for="p-openings">Number of openings</label>
+                <input type="number" id="p-openings" min="1" value="1">
+              </div>
+              <div class="field span-2">
+                <label for="p-description">Role description <span class="req">*</span></label>
+                <textarea id="p-description" required placeholder="What the role involves, team context, working model."></textarea>
+              </div>
+              <div class="field span-2">
+                <label for="p-requirements">Key requirements</label>
+                <textarea id="p-requirements" placeholder="One requirement per line — each line becomes a bullet point."></textarea>
+                <span class="hint">One requirement per line. They will be rendered as a bulleted list.</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" id="post-submit">Publish vacancy</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- ===== Manage vacancies ===== -->
+      <div class="tab-panel" id="panel-jobs" role="tabpanel">
+        <div class="results-bar">
+          <div class="results-count" id="jobs-count">Loading…</div>
+          <button class="btn btn-ghost btn-sm" type="button" id="reload-jobs">Refresh</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>Title</th><th>Company</th><th>Location</th><th>Type</th><th>Posted</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="jobs-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== Applications ===== -->
+      <div class="tab-panel" id="panel-apps" role="tabpanel">
+        <div class="results-bar">
+          <div class="results-count" id="apps-count">Loading…</div>
+          <button class="btn btn-ghost btn-sm" type="button" id="reload-apps">Refresh</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>Candidate</th><th>Role applied for</th><th>Contact</th><th>Experience</th><th>CV</th><th>Status</th><th>Received</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="apps-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== Client enquiries ===== -->
+      <div class="tab-panel" id="panel-enq" role="tabpanel">
+        <div class="results-bar">
+          <div class="results-count" id="enq-count">Loading…</div>
+          <button class="btn btn-ghost btn-sm" type="button" id="reload-enq">Refresh</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>Company</th><th>Contact</th><th>Hiring for</th><th>Positions</th><th>Type</th><th>Status</th><th>Received</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="enq-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Detail modal -->
+<div class="modal" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modal-title" style="margin:0">Record details</h3>
+      <button class="modal-close" type="button" id="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<footer id="site-footer"></footer>
+
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+<script src="js/jobs-common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

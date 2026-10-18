@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit Your CV | Recruitive Hiring Systems</title>
+<meta name="description" content="Share your CV with Recruitive Hiring Systems. Apply to a live vacancy or register with our talent pool — your details go straight to recruiters@Noida, Sector 58.">
+<meta name="theme-color" content="#070f1e">
+<link rel="icon" href="images/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Home</a> / Submit your CV</p>
+
+      <div class="grid grid-2" style="gap:40px;align-items:start">
+        <div>
+          <span class="eyebrow">For candidates</span>
+          <h1 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Share your CV with our recruiters</h1>
+          <p class="lead">Apply against a specific vacancy or register with our talent pool for upcoming roles. Your details land directly with the recruitment team at <strong style="color:#fff">Sector 58, Noida, Uttar Pradesh, India</strong>.</p>
+
+          <ol class="step-list" style="margin:30px 0">
+            <li><h3>Fill the form</h3><p>Takes about three minutes. Fields marked with * are required.</p></li>
+            <li><h3>Attach your CV</h3><p>PDF, DOC or DOCX up to 10 MB. Your file is uploaded securely and linked to your application.</p></li>
+            <li><h3>We screen &amp; call</h3><p>If your profile matches a live or upcoming role, a recruiter calls you to discuss fit.</p></li>
+          </ol>
+
+          <div class="info-list">
+            <li><span class="ic" data-icon="mail"></span><div><strong>Email your CV directly</strong><a href="mailto:recruitivehiringsystems@gmail.com?subject=CV%20submission%20-%20candidate%20application">recruitivehiringsystems@gmail.com</a></div></li>
+            <li><span class="ic" data-icon="whatsapp"></span><div><strong>WhatsApp us</strong><a href="#" data-wa="Hi Recruitive Hiring Systems, I would like to share my CV for open roles." target="_blank" rel="noopener">+91 70807 86893</a></div></li>
+            <li><span class="ic" data-icon="pin"></span><div><strong>Visit our office</strong><span class="val">Sector 58, Noida, Uttar Pradesh, India</span></div></li>
+          </div>
+
+          <div class="form-note" style="margin-top:24px">
+            <span data-icon="info"></span>
+            <span>Your CV is used only for recruitment purposes by Recruitive Hiring Systems and is never sold or shared with unrelated third parties.</span>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h2 style="font-size:1.35rem;margin-bottom:6px">Candidate application</h2>
+          <p class="small muted" style="margin-bottom:22px">All fields marked * are required.</p>
+
+          <div class="alert" id="apply-alert" role="status" aria-live="polite"></div>
+
+          <form id="apply-form" novalidate>
+            <div class="field">
+              <label for="job_id">Applying for</label>
+              <select id="job_id" name="job_id">
+                <option value="">General application (talent pool)</option>
+              </select>
+              <span class="hint">Choose a vacancy, or leave as general if you want to be considered for future roles.</span>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="full_name">Full name <span class="req">*</span></label>
+                <input type="text" id="full_name" name="full_name" autocomplete="name" required placeholder="e.g. Ananya Sharma">
+              </div>
+              <div class="field">
+                <label for="email">Email address <span class="req">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com">
+              </div>
+              <div class="field">
+                <label for="phone">Phone / WhatsApp <span class="req">*</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="+91 98765 43210">
+              </div>
+              <div class="field">
+                <label for="city">Current city</label>
+                <input type="text" id="city" name="city" placeholder="e.g. Noida">
+              </div>
+              <div class="field">
+                <label for="experience_years">Total experience</label>
+                <input type="text" id="experience_years" name="experience_years" placeholder="e.g. 3 years / Fresher">
+              </div>
+              <div class="field">
+                <label for="notice_period">Notice period</label>
+                <input type="text" id="notice_period" name="notice_period" placeholder="e.g. Immediate / 30 days">
+              </div>
+              <div class="field">
+                <label for="current_ctc">Current CTC</label>
+                <input type="text" id="current_ctc" name="current_ctc" placeholder="e.g. ₹6.5 LPA">
+              </div>
+              <div class="field">
+                <label for="expected_ctc">Expected CTC</label>
+                <input type="text" id="expected_ctc" name="expected_ctc" placeholder="e.g. ₹9 LPA">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="cover_letter">Brief note about you</label>
+              <textarea id="cover_letter" name="cover_letter" placeholder="Key skills, achievements and the kind of role you are looking for."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="cv_file">Attach your CV <span class="req">*</span></label>
+              <input type="file" id="cv_file" name="cv_file" accept=".pdf,.doc,.docx,.rtf,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+              <span class="hint">PDF, DOC or DOCX &middot; up to 10 MB. If upload is unavailable, submit the form and email your CV to recruitivehiringsystems@gmail.com.</span>
+              <div class="upload-state" id="upload-state"></div>
+            </div>
+
+            <div class="checkbox-row">
+              <input type="checkbox" id="consent" name="consent" required>
+              <label for="consent">I confirm the details above are accurate and consent to Recruitive Hiring Systems contacting me about relevant roles and storing my CV for recruitment purposes.</label>
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit" id="apply-submit">Submit application</button>
+            <p class="small muted center" style="margin:14px 0 0">Need help? <a href="#" data-wa="Hi Recruitive Hiring Systems, I need help submitting my application." target="_blank" rel="noopener">Message us on WhatsApp</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+<script src="js/jobs-common.js"></script>
+<script src="js/apply.js"></script>
+</body>
+</html>
